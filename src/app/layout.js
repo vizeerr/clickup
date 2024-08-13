@@ -1,5 +1,9 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
+import StoreProvider from "@/components/StoreProvider";
+import TopNavBar from "@/components/TopNavBar";
+import Sidebar from "@/components/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,7 +15,25 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <StoreProvider>
+      <body className={`${inter.className} `}>
+        
+
+       
+      <main >
+        <TopNavBar/>
+        
+        <div className="flex justify-between items-start">
+          <Sidebar/>
+          <div className="w-full h-full">            
+            <Toaster position="bottom-center"reverseOrder={false}/>
+            {children }
+
+          </div>
+          </div>
+      </main>
+      </body>
+    </StoreProvider>
+  </html>
   );
 }
